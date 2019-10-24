@@ -1,4 +1,4 @@
-node_modules
+node_modules/*
 !node_modules/vue/dist/vue.min.js
 !node_modules/normalize.css/normalize.css
 

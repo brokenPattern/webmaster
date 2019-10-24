@@ -1,0 +1,49 @@
+(function () {
+
+    new Vue({
+        el: "#vue-wrapper",
+        data: {
+            currActive: '#title-section',
+            navlinks: document.querySelectorAll('nav a'),
+            scrollTargets: document.querySelectorAll('section')
+        },
+        computed:{
+            activeLinkSelector: function(){
+                var app = this
+                return 'nav a[href="'+this.currActive+'"]'
+            } 
+        },
+        watch:{
+            currActive: function(value){
+                var app = this
+                app.navlinks.forEach((navlink) => {
+                    navlink.classList.remove('active');
+                })
+                document.querySelector(app.activeLinkSelector)
+                        .classList.add('active');
+            },
+        },
+        methods: {
+            scrollSpy: function () {
+                var selectors = document.querySelectorAll('section')
+                selectors.forEach((selector) => {
+                    var selTop = selector.getBoundingClientRect().top
+                    var  selBottom = selector.getBoundingClientRect().bottom
+                    var selID = selector.getAttribute('id')
+                    if (selTop <= 0 && selBottom >= 0) {
+                        this.currActive = '#'+selID
+                    }
+                })
+                
+            },
+
+        },
+        created: function () {
+            window.addEventListener('scroll', this.scrollSpy);
+        },
+        destroyed: function () {
+            window.removeEventListener('scroll', this.scrollSpy);
+        }
+    });
+
+}());

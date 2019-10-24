@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Bootstrap - Michał Neumann</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
+    <link rel="apple-touch-icon-precomposed" sizes="180x180" href="/images/icons/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300|Montserrat:700&display=swap&subset=latin-ext" rel="stylesheet">
+    <link rel="stylesheet" href="node_modules/normalize.css/normalize.css">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+
+<body>
+
+    <div id="vue-wrapper">
+        <header class="secondary-bg">
+            <nav class="container grid-container grid-columns-2">
+                <h4><a href="#title-section" @click="scrollToTarget">Start Bootstrap</a><span>Start Bootstrap</span></h4>
+                <ul class="header-font" :class="[menuOpen ? 'mobile-visible' : 'mobile-hidden']">
+                    <li><a href="#title-section" @click="scrollToTarget">Top</a></li>
+                    <li><a href="#portfolio-section" @click="scrollToTarget">Portfolio</a></li>
+                    <li><a href="#info-section" @click="scrollToTarget">About</a></li>
+                    <li><a href="#contact-section" @click="scrollToTarget">Contact</a></li>
+                </ul>
+                <button title="Menu" class="menu-button" :aria-label="[menuOpen ? 'Close Menu' : 'Open Menu']" :class="[menuOpen ? 'close-menu' : 'open-menu']" @click="menuOpen = !menuOpen"><i></i><i></i><i></i></button>
+            </nav>
+        </header>
+
+        <section id="title-section" class="primary-bg">
+            <div class="container">
+                <img id="title-img" src="images/web-developer.svg" alt="Illustration of a web developer with a gorgeous mustache">
+                <h1>Start Bootstrap</h1>
+                <p class="lead">Web&nbsp;Developer - Graphic&nbsp;Artist - User Experience&nbsp;Designer</p>
+            </div>
+        </section>
+
+
+        <section id="portfolio-section">
+            <h2>Portfolio</h2>
+            <div class="container grid-container grid-columns-3">
+                <div v-for="(item, key) in portfolioItems" :key="key" :id="key" class="portfolio-item" :style="{backgroundColor: [item.accent]}" :aria-description="item.title +'. Click for details'" @click="openModal(key)"><img :src="'images/'+item.imgSrc+'.svg'" :alt="item.title"></div>
+            </div>
+        </section>
+
+        <section id="info-section" class="primary-bg">
+            <div class="container">
+                <h2>About</h2>
+            </div>
+            <div class="container narrow grid-container grid-columns-2 grid-align-start">
+                <p>Freelancer is a free bootstrap theme created by Start Bootstrap. The download includes the complete source files including HTML, CSS, and JavaScript as well as optional SASS stylesheets for easy customization.</p>
+                <p>You can create your own custom avatar for the masthead, change the icon in the dividers, and add your email address to the contact form to make it fully functional!</p>
+            </div>
+            <div class="container"><a href="https://www.linkedin.com/in/michalneumann/" title="Chek out my LinkedIn" class="button hollow download-icon" rel="nofollow">Download Now!</a></div>
+        </section>
+
+        <section id="contact-section">
+            <div class="container narrow">
+                <h2>Contact me</h2>
+                <form id="contact-form">
+                    <div class="row">
+                        <input id="name" type="text" required autocomplete="name" @keyup="changeLabelClass">
+                        <label for="name">Name</label>
+                    </div>
+                    <div class="row">
+                        <input id="email" type="email" required autocomplete="email" @keyup="changeLabelClass">
+                        <label for="email">Email Address</label>
+                    </div>
+                    <div class="row">
+                        <input id="phone" type="tel" required autocomplete="tel" @keyup="changeLabelClass">
+                        <label for="phone">Phone Number</label>
+                    </div>
+                    <div class="row">
+                        <textarea id="message" rows="10" required @keyup="changeLabelClass"></textarea>
+                        <label for="message">Message</label>
+                    </div>
+                    <input id="submit-button" type="submit" value="Send">
+                </form>
+            </div>
+        </section>
+
+        <footer class="secondary-bg">
+            <address class="container grid-container grid-columns-3 grid-align-start">
+                <div>
+                    <h3>Location</h3>
+                    2215 John Daniel Drive<br> Clark, MO 65243
+                </div>
+                <div>
+                    <h3>Around the Web</h3>
+                    <a class="social-media" href="#1" rel="nofollow"><img src="images/icons/facebook.svg" alt="Facebook"></a>
+                    <a class="social-media" href="#1" rel="nofollow"><img src="images/icons/google-plus.svg" alt="Google+"></a>
+                    <a class="social-media" href="#1" rel="nofollow"><img src="images/icons/twitter.svg" alt="Twitter"></a>
+                    <a class="social-media" href="#1" rel="nofollow"><img src="images/icons/linked-in.svg" alt="LinkedIn"></a>
+                    <a class="social-media" href="#1" rel="nofollow"><img src="images/icons/dribbble.svg" alt="Dribbble"></a>
+                </div>
+                <div class="stretch">
+                    <h3>About Freelancer</h3>
+                    Freelance is a free to use, MIT licensed Bootstrap theme created by <a href="https://www.linkedin.com/in/michalneumann/" title="Chek out my LinkedIn"  rel="nofollow">Start&nbsp;Bootstrap</a>.
+                </div>
+            </address>
+            <div class="copyright secondary-dark-bg">Copyright &copy; Your Website 2018</div>
+        </footer>
+        <transition name="fade">
+            <div class="modal-wrapper" v-if="modalItem != null" v-show="showModal">
+                <div class="modal container narrow">
+                    <button title="Close modal" @click="closeModal">&times;</button>
+                    <div class="modal-header" :style="{backgroundColor: [modalItem.accent]}"><img :src="'images/'+modalItem.imgSrc+'.svg'" :alt="modalItem.title"></div>
+                    <div class="modal-body">
+                        <h3 :style="{borderBottomColor: [modalItem.accent]}">{{modalItem.title}}</h3>
+                        <p>{{modalItem.description}}</p>
+                    </div>
+                </div>
+            </div>
+        </transition>
+    </div>
+
+    <script src="node_modules/vue/dist/vue.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>

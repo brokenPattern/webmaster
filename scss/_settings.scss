@@ -1,0 +1,92 @@
+//list of contents
+//1. functions
+//2. mixins
+
+
+
+
+
+//1. functions
+
+
+
+@function rem-calc($size) {
+    $remSize: $size / 18;  //18px base font
+    @return #{$remSize}rem;
+}
+
+
+
+//2. mixins
+
+
+
+@mixin breakpoint($size) {
+    @media screen and (min-width: $size) {
+        @content;
+    }
+}
+
+
+
+//3.variables
+
+
+
+//colors
+$white: #fff;
+$primary: #18BC9C; //LIGHT SEA GREEN
+$secondary: #2D3E50; // CHARCOAL
+$secondary-dark: #1B2530; //DARK GUNMETAL
+$accent: #BA4D63; 
+
+
+//sizes
+$small: 0px;
+$medium: 800px; //screen
+$large: 1080px; //screen
+$layout-width: rem-calc(1040);
+$grid-gap: rem-calc(27);
+$global-radius: rem-calc(5);
+
+//fonts + typography
+$font-body: Lato,
+Futura,
+"Trebuchet MS",
+Arial,
+sans-serif;
+$font-headers: Montserrat,
+Futura,
+"Trebuchet MS",
+Arial,
+sans-serif;
+
+$font-weight-normal: 300;
+$font-weight-bold: 700;
+$font-weight-body: $font-weight-normal;
+$font-weight-headers: $font-weight-bold;
+
+$font-sizes-small: (
+    'html': 16px,
+    'h1': rem-calc(36),
+    'h2': rem-calc(20),
+    'h3': rem-calc(19),
+    'h4': rem-calc(18),
+    'p.lead, form': rem-calc(21),
+    '.copyright': 0.8rem,
+
+);
+$font-sizes-medium: (
+    'html': 16px,
+    'h1': rem-calc(75),
+    'h2': rem-calc(48),
+    'h3': rem-calc(23),
+    'h4': rem-calc(23),
+    'p.lead, form': rem-calc(28),
+    '.copyright': 0.9rem,
+);
+
+$font-sizes-large: (
+    'html': 18px,
+    '.copyright': 0.7rem,
+);

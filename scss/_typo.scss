@@ -1,0 +1,133 @@
+:-moz-selection {
+    background-color: $accent;
+    text-shadow: none;
+    color: $white;
+}
+
+::selection {
+    background-color: $accent;
+    text-shadow: none;
+    color: $white;
+}
+a, input[type="submit"], button{
+    color: $white;
+    text-decoration: none;
+    cursor: pointer;
+    outline: none;
+    &.button, &#submit-button {
+        display: inline-block;
+        margin: 1rem auto 0;
+        padding: 1rem 2rem;
+        border-radius: $global-radius;
+        background-color: $primary;
+        border: 2px solid $primary;
+        transition: all 0.3s ease;
+        &.hollow {
+            background-color: transparent;
+            border: 2px solid currentColor;
+        }
+        &.download-icon {
+            padding: 1rem 1rem 1rem 3rem;
+            background-image: url("../images/down.svg"), url("../images/down-secondary-dark.svg");
+            background-position: 1rem center, -2rem center;
+            background-size: 1rem, 0.9rem;
+            background-repeat: no-repeat, no-repeat;
+            &:hover,
+            &:active {
+                background-position: -2rem center, 1rem center;
+                background-size: 0.9rem, 1rem;
+            }
+        }
+        &:hover,
+        &:active {
+            color: $secondary-dark;
+            background-color: $white;
+
+        }
+    }
+}
+
+a::-moz-selection,
+button::-moz-selection {
+    background-color: transparent;
+    text-shadow: none;
+    color: inherit;
+}
+
+a::selection,
+button::selection {
+    background-color: transparent;
+    text-shadow: none;
+    color: inherit;
+}
+
+html {
+
+    font-family: $font-body;
+    font-weight: $font-weight-body;
+    line-height: 1.618;
+}
+
+.color-white {
+    color: $white;
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.header-font {
+    font-family: $font-headers;
+    font-weight: $font-weight-headers;
+    text-transform: uppercase;
+}
+
+@each $selector,
+$size in $font-sizes-small {
+    #{$selector} {
+        font-size: #{$size};
+    }
+}
+
+@include breakpoint($medium) {
+    @each $selector,
+    $size in $font-sizes-medium {
+        #{$selector} {
+            font-size: #{$size};
+        }
+    }
+}
+
+
+@include breakpoint($large) {
+    @each $selector,
+    $size in $font-sizes-large {
+        #{$selector} {
+            font-size: #{$size};
+        }
+    }
+}
+
+
+
+
+section, footer{
+    text-align: center;
+}
+
+#info-section p {
+    text-align: left;
+}
+address{
+    font-style: normal;
+}
+footer a{
+    color: $primary;
+    &:hover, &:active {
+        text-decoration:underline;
+        text-decoration-style: wavy;
+    }
+}
